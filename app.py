@@ -57,7 +57,15 @@ def generate_pdf():
     """
 
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu"
+            ]
+        )
         page = browser.new_page()
         page.set_content(html)
         page.pdf(path="report.pdf", format="A4")
