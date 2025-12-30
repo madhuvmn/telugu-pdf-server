@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: telugu-pdf-server
+    name: telugu-pdf-service
     env: python
     plan: free
     buildCommand: |
       pip install -r requirements.txt
-      playwright install chromium
+      python -m playwright install chromium
     startCommand: gunicorn app:app
